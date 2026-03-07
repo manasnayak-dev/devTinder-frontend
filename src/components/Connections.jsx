@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import BASE_URL from "../store/base_url";
 import { useDispatch, useSelector } from "react-redux";
-import { addConnections } from "../store/connectionSlice";
+import { addConnections, removeConnections } from "../store/connectionSlice";
 
 const Connections = () => {
   const dispatch = useDispatch();
@@ -22,11 +22,30 @@ const Connections = () => {
   useEffect(() => {
     fetchConnection();
   }, []);
+
+  const handleonRemove = async (requestid) => {
+    try {
+      const res = await axios.post(
+        BASE_URL + "/connection/remove/" + requestid,
+        {},
+        { withCredentials: true },
+      );
+
+      dispatch(removeConnections(requestid));
+    } catch (error) {
+      console.log("Can not remove...");
+    }
+  };
   return (
     <div>
-      <div className="flex justify-center m-4 text-3xl font-bold">Connections</div>
+      <div className="flex justify-center m-4 text-3xl font-bold">
+        Connections
+      </div>
       {connections.map((connection) => (
-        <div key={connection._id} className="card card-side bg-base-300 shadow-sm mb-2">
+        <div
+          key={connection._id}
+          className="card card-side bg-base-300 shadow-sm mb-2"
+        >
           <figure className="ml-5">
             <img
               className="size-20 rounded-box mr-1.5"
@@ -39,7 +58,12 @@ const Connections = () => {
             <p>Click the button to watch on Jetflix app.</p>
             <div className="card-actions justify-end"></div>
           </div>
-          <button className="btn btn-outline btn-accent mt-9.5 mr-10">Remove Connection</button>
+          <button
+            className="btn btn-outline btn-accent mt-9.5 mr-10"
+            onClick={() => handleonRemove(connection.connectionId)}
+          >
+            Remove Connection
+          </button>
         </div>
       ))}
     </div>

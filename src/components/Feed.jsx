@@ -33,7 +33,7 @@ const Feed = () => {
   }
 
   if (feed.length === 0) {
-    <h1>Feeds are not there</h1>;
+    return <h1 className="flex justify-center mt-30 font-bold text-5xl">Feeds are not there</h1>;
   }
 
   const handleoninterest = async (status, userid) => {
@@ -63,8 +63,18 @@ const Feed = () => {
               </div>
               <p>{feed.about}</p>
               <div className="card-actions m">
-                <button className="btn btn-neutral mr-3" onClick={() => handleoninterest("ignored", feed._id)}>Ignored</button>
-                <button className="btn btn-success ml-3" onClick={() => handleoninterest("interested", feed._id)}>Interested</button>
+                <button
+                  className="btn btn-neutral mr-3"
+                  onClick={() => handleoninterest("ignored", feed._id)}
+                >
+                  Ignored
+                </button>
+                <button
+                  className="btn btn-success ml-3"
+                  onClick={() => handleoninterest("interested", feed._id)}
+                >
+                  Interested
+                </button>
               </div>
             </div>
           </div>
