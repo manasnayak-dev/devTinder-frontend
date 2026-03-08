@@ -5,13 +5,14 @@ import Footer from "./Footer";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { addUser, removeUser } from "../store/userSlice";
+import BASE_URL from "../store/base_url";
 
 const Body = () => {
   const dispatch = useDispatch();
 
   const fetchUser = async () => {
     try {
-      const res = await axios.get("http://localhost:7777/profile", {
+      const res = await axios.get(BASE_URL+"/profile", {
         withCredentials: true,
       });
 
