@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../store/userSlice";
 import toast from "react-hot-toast";
+import BASE_URL from "../store/base_url";
 
 const Profile = () => {
   const user = useSelector((store) => store.user);
@@ -18,7 +19,7 @@ const Profile = () => {
   const handleonsave = async () => {
     try {
       const res = await axios.patch(
-        "http://localhost:7777/profile/edit",
+        BASE_URL+"/profile/edit",
         {
           firstName,
           lastName,
