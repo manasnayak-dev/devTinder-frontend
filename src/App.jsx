@@ -10,6 +10,7 @@ import Profile from "./components/Profile";
 import { Toaster } from "react-hot-toast";
 import Connections from "./components/Connections";
 import Request from "./components/Request";
+import Chat from "./components/chat";
 // import { ToastBar } from './../node_modules/react-hot-toast/src/components/toast-bar';
 function App() {
   const user = useSelector((store) => store.user);
@@ -42,6 +43,10 @@ function App() {
             <Route
               path="/request"
               element={user ? <Request /> : <Navigate to="/login" replace />}
+            />
+            <Route
+              path="/chat"
+              element={user ? <Chat /> : <Navigate to="/login" replace />}
             />
             <Route path="/signup" element={<Signup />} />
           </Route>
